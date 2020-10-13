@@ -18,11 +18,15 @@
 
 ## 后端
 
-1. 使用IDEA导入live-backend-mp项目，并通过Modules的方式导入live-backend-common项目
+1. 创建数据库，执行根目录中的live.sql，并修改artist表中的微信APPID等配置
+
+![image.png](https://upload-images.jianshu.io/upload_images/1754553-996c58c6a5bd443c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+2. 使用IDEA导入live-backend-mp项目，并通过Modules的方式导入live-backend-common项目
 
 ![image.png](https://upload-images.jianshu.io/upload_images/1754553-b9c521cc05c9daf4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-2. 修改application-dev中的MySQL，Redis，阿里云OSS配置
+3. 修改application-dev中的MySQL，Redis，阿里云OSS配置
 
 ![image.png](https://upload-images.jianshu.io/upload_images/1754553-9f45dc596be980de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
