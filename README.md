@@ -2,6 +2,10 @@
 
 微信登录，发文本动态，发图文动态，发视频动态，关注，转发，评论，点赞，收藏等等
 
+# 项目运行截图
+
+![image.png](https://upload-images.jianshu.io/upload_images/1754553-a870b839d364ca92.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 # 技术栈
 
 后端：Java，SpringBoot，MyBatis，MySQL，Redis
@@ -49,15 +53,4 @@
 4. 运行到微信小程序
 
 ![image.png](https://upload-images.jianshu.io/upload_images/1754553-25c7af0b1cd18477.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-# 项目运行截图
-
-![image.png](https://upload-images.jianshu.io/upload_images/1754553-3a2dedff6107bf88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image.png](https://upload-images.jianshu.io/upload_images/1754553-48a50832c0747ba3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image.png](https://upload-images.jianshu.io/upload_images/1754553-bb874010d96d0370.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image.png](https://upload-images.jianshu.io/upload_images/1754553-47e9a311b2a62266.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image.png](https://upload-images.jianshu.io/upload_images/1754553-7ecc799b0d23cf65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image.png](https://upload-images.jianshu.io/upload_images/1754553-7d1a1e381f083297.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image.png](https://upload-images.jianshu.io/upload_images/1754553-bc5c11b96deecf52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image.png](https://upload-images.jianshu.io/upload_images/1754553-6d871ddd0bfa7aa4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
