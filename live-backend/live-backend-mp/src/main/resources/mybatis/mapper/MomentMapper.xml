@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.MomentMapper">
+
+
+  <delete id="deleteByPrimaryKey">
+    delete from moment
+    where id = #{id}
+  </delete>
+
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into moment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="textContent != null">
+        text_content,
+      </if>
+      <if test="activityId != null">
+        activity_id,
+      </if>
+      <if test="likeCount != null">
+        like_count,
+      </if>
+      <if test="commentCount != null">
+        comment_count,
+      </if>
+      <if test="repostCount != null">
+        repost_count,
+      </if>
+      <if test="shareCount != null">
+        share_count,
+      </if>
+      <if test="viewCount != null">
+        view_count,
+      </if>
+      <if test="repostMomentId != null">
+        repost_moment_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="artistId != null">
+        artist_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId},
+      </if>
+      <if test="type != null">
+        #{type},
+      </if>
+      <if test="textContent != null">
+        #{textContent},
+      </if>
+      <if test="activityId != null">
+        #{activityId},
+      </if>
+      <if test="likeCount != null">
+        #{likeCount},
+      </if>
+      <if test="commentCount != null">
+        #{commentCount},
+      </if>
+      <if test="repostCount != null">
+        #{repostCount},
+      </if>
+      <if test="shareCount != null">
+        #{shareCount},
+      </if>
+      <if test="viewCount != null">
+        #{viewCount},
+      </if>
+      <if test="repostMomentId != null">
+        #{repostMomentId},
+      </if>
+      <if test="status != null">
+        #{status},
+      </if>
+      <if test="artistId != null">
+        #{artistId},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective">
+    update moment
+    <set>
+      <if test="userId != null">
+        user_id = #{userId},
+      </if>
+      <if test="type != null">
+        type = #{type},
+      </if>
+      <if test="textContent != null">
+        text_content = #{textContent},
+      </if>
+      <if test="activityId != null">
+        activity_id = #{activityId},
+      </if>
+      <if test="likeCount != null">
+        like_count = #{likeCount},
+      </if>
+      <if test="commentCount != null">
+        comment_count = #{commentCount},
+      </if>
+      <if test="repostCount != null">
+        repost_count = #{repostCount},
+      </if>
+      <if test="shareCount != null">
+        share_count = #{shareCount},
+      </if>
+      <if test="viewCount != null">
+        view_count = #{viewCount},
+      </if>
+      <if test="repostMomentId != null">
+        repost_moment_id = #{repostMomentId},
+      </if>
+      <if test="status != null">
+        status = #{status},
+      </if>
+      <if test="artistId != null">
+        artist_id = #{artistId},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+
+  <update id="updateLikeCount">
+    update moment
+    set like_count = like_count + #{count}
+    where id = #{id}
+    and artist_id = #{artistId}
+  </update>
+
+  <update id="updateCommentCount">
+    update moment
+    set comment_count = comment_count + #{count}
+    where id = #{id}
+    and artist_id = #{artistId}
+  </update>
+
+  <update id="updateRepostCount">
+    update moment
+    set repost_count = repost_count + #{count}
+    where id = #{id}
+    and artist_id = #{artistId}
+  </update>
+
+  <update id="updateShareCount">
+    update moment
+    set share_count = share_count + #{count}
+    where id = #{id}
+    and artist_id = #{artistId}
+  </update>
+
+  <update id="updateViewCount">
+    update moment
+    set view_count = view_count + #{count}
+    where id = #{id}
+    and artist_id = #{artistId}
+  </update>
+
+
+</mapper>

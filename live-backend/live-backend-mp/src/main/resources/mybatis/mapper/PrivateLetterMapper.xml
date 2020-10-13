@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.PrivateLetterMapper">
+  
+  
+  
+  <delete id="deleteByPrimaryKey">
+    delete from private_letter
+    where id = #{id}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into private_letter (sender_user_id, receiver_user_id, type, 
+      text_content, image_url, artist_id, 
+      create_time, update_time)
+    values (#{senderUserId}, #{receiverUserId}, #{type}, 
+      #{textContent}, #{imageUrl}, #{artistId}, 
+      #{createTime}, #{updateTime})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into private_letter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="senderUserId != null">
+        sender_user_id,
+      </if>
+      <if test="receiverUserId != null">
+        receiver_user_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="textContent != null">
+        text_content,
+      </if>
+      <if test="imageUrl != null">
+        image_url,
+      </if>
+      <if test="artistId != null">
+        artist_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="senderUserId != null">
+        #{senderUserId},
+      </if>
+      <if test="receiverUserId != null">
+        #{receiverUserId},
+      </if>
+      <if test="type != null">
+        #{type},
+      </if>
+      <if test="textContent != null">
+        #{textContent},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl},
+      </if>
+      <if test="artistId != null">
+        #{artistId},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective">
+    update private_letter
+    <set>
+      <if test="senderUserId != null">
+        sender_user_id = #{senderUserId},
+      </if>
+      <if test="receiverUserId != null">
+        receiver_user_id = #{receiverUserId},
+      </if>
+      <if test="type != null">
+        type = #{type},
+      </if>
+      <if test="textContent != null">
+        text_content = #{textContent},
+      </if>
+      <if test="imageUrl != null">
+        image_url = #{imageUrl},
+      </if>
+      <if test="artistId != null">
+        artist_id = #{artistId},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey">
+    update private_letter
+    set sender_user_id = #{senderUserId},
+      receiver_user_id = #{receiverUserId},
+      type = #{type},
+      text_content = #{textContent},
+      image_url = #{imageUrl},
+      artist_id = #{artistId},
+      create_time = #{createTime},
+      update_time = #{updateTime}
+    where id = #{id}
+  </update>
+</mapper>

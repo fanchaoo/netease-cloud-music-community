@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.FollowRelationMapper">
+
+
+  <delete id="deleteByPrimaryKey">
+    delete from follow_relation
+    where id = #{id}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into follow_relation (user_id, target_type, target_id, 
+      artist_id, create_time, update_time
+      )
+    values (#{userId}, #{targetType}, #{targetId}, 
+      #{artistId}, #{createTime}, #{updateTime}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into follow_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="targetType != null">
+        target_type,
+      </if>
+      <if test="targetId != null">
+        target_id,
+      </if>
+      <if test="artistId != null">
+        artist_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId},
+      </if>
+      <if test="targetType != null">
+        #{targetType},
+      </if>
+      <if test="targetId != null">
+        #{targetId},
+      </if>
+      <if test="artistId != null">
+        #{artistId},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective">
+    update follow_relation
+    <set>
+      <if test="userId != null">
+        user_id = #{userId},
+      </if>
+      <if test="targetType != null">
+        target_type = #{targetType},
+      </if>
+      <if test="targetId != null">
+        target_id = #{targetId},
+      </if>
+      <if test="artistId != null">
+        artist_id = #{artistId},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey">
+    update follow_relation
+    set user_id = #{userId},
+      target_type = #{targetType},
+      target_id = #{targetId},
+      artist_id = #{artistId},
+      create_time = #{createTime},
+      update_time = #{updateTime}
+    where id = #{id}
+  </update>
+
+  <delete id="delete">
+    delete from follow_relation
+    where user_id = #{userId}
+    and target_type = #{targetType}
+    and target_id = #{targetId}
+    and artist_id = #{artistId}
+  </delete>
+</mapper>

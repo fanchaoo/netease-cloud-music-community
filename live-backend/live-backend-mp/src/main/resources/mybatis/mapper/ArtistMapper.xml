@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.ArtistMapper">
+  
+  
+  
+  <delete id="deleteByPrimaryKey">
+    delete from artist
+    where id = #{id}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into artist (name, mp_weixin_app_id, mp_weixin_app_secret, 
+      mp_qq_app_id, mp_qq_app_secret, random_key, 
+      create_time, update_time)
+    values (#{name}, #{mpWeixinAppId}, #{mpWeixinAppSecret}, 
+      #{mpQqAppId}, #{mpQqAppSecret}, #{randomKey}, 
+      #{createTime}, #{updateTime})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into artist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="mpWeixinAppId != null">
+        mp_weixin_app_id,
+      </if>
+      <if test="mpWeixinAppSecret != null">
+        mp_weixin_app_secret,
+      </if>
+      <if test="mpQqAppId != null">
+        mp_qq_app_id,
+      </if>
+      <if test="mpQqAppSecret != null">
+        mp_qq_app_secret,
+      </if>
+      <if test="randomKey != null">
+        random_key,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name},
+      </if>
+      <if test="mpWeixinAppId != null">
+        #{mpWeixinAppId},
+      </if>
+      <if test="mpWeixinAppSecret != null">
+        #{mpWeixinAppSecret},
+      </if>
+      <if test="mpQqAppId != null">
+        #{mpQqAppId},
+      </if>
+      <if test="mpQqAppSecret != null">
+        #{mpQqAppSecret},
+      </if>
+      <if test="randomKey != null">
+        #{randomKey},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective">
+    update artist
+    <set>
+      <if test="name != null">
+        name = #{name},
+      </if>
+      <if test="mpWeixinAppId != null">
+        mp_weixin_app_id = #{mpWeixinAppId},
+      </if>
+      <if test="mpWeixinAppSecret != null">
+        mp_weixin_app_secret = #{mpWeixinAppSecret},
+      </if>
+      <if test="mpQqAppId != null">
+        mp_qq_app_id = #{mpQqAppId},
+      </if>
+      <if test="mpQqAppSecret != null">
+        mp_qq_app_secret = #{mpQqAppSecret},
+      </if>
+      <if test="randomKey != null">
+        random_key = #{randomKey},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey">
+    update artist
+    set name = #{name},
+      mp_weixin_app_id = #{mpWeixinAppId},
+      mp_weixin_app_secret = #{mpWeixinAppSecret},
+      mp_qq_app_id = #{mpQqAppId},
+      mp_qq_app_secret = #{mpQqAppSecret},
+      random_key = #{randomKey},
+      create_time = #{createTime},
+      update_time = #{updateTime}
+    where id = #{id}
+  </update>
+</mapper>

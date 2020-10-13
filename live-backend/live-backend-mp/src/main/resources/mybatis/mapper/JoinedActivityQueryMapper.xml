@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD QueryMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.JoinedActivityQueryMapper">
+  <resultMap id="BaseResultMap" type="me.fanchaoo.dbo.JoinedActivityDBO">
+    <id column="id" property="id"/>
+    <result column="user_id" property="userId"/>
+    <result column="activity_id" property="activityId"/>
+    <result column="artist_id" property="artistId"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, activity_id, artist_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from joined_activity
+    where id = #{id}
+  </select>
+
+  <select id="queryByUserId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from joined_activity
+    where artist_id = #{artistId}
+    and user_id = #{userId}
+    order by id desc
+    <if test="start != null and pageSize != null">
+      limit #{start},#{pageSize}
+    </if>
+  </select>
+
+
+</mapper>

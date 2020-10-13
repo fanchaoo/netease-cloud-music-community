@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD QueryMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.CommentQueryMapper">
+  <resultMap id="BaseResultMap" type="me.fanchaoo.dbo.CommentDBO">
+    <id column="id" property="id"/>
+    <result column="user_id" property="userId"/>
+    <result column="moment_id" property="momentId"/>
+    <result column="content" property="content"/>
+    <result column="parent_id" property="parentId"/>
+    <result column="reply_to_id" property="replyToId"/>
+    <result column="like_count" property="likeCount"/>
+    <result column="status" property="status"/>
+    <result column="artist_id" property="artistId"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, moment_id, content, parent_id, reply_to_id, like_count, status, artist_id, create_time,
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from comment
+    where id = #{id}
+  </select>
+
+  <select id="exists" resultType="int">
+    select count(1)
+    from comment
+    where artist_id = #{artistId}
+    and id = #{id}
+  </select>
+
+  <select id="queryComment" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from comment
+    where artist_id = #{artistId}
+    and moment_id = #{momentId}
+    and parent_id = #{parentId}
+    order by id desc
+    limit #{start},#{pageSize}
+  </select>
+
+  <select id="queryCommentIds" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from comment
+    where artist_id = #{artistId}
+    and id in
+    <foreach collection="commentIdList" item="item" separator="," open="(" close=")">
+      #{item}
+    </foreach>
+  </select>
+
+  <select id="countByParentId" resultType="me.fanchaoo.web.dto.GroupCountDTO">
+    select parent_id as id,
+    count(*) as count
+    from comment
+    where artist_id = #{artistId}
+    and parent_id in
+    <foreach collection="commentIdList" item="item" separator="," open="(" close=")">
+      #{item}
+    </foreach>
+    group by parent_id
+  </select>
+
+  <select id="getById" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from comment
+    where id = #{id}
+    and artist_id = #{artistId}
+    and status = #{status}
+  </select>
+
+  <select id="getUserId" resultType="long">
+    select
+    user_id
+    from comment
+    where id = #{id}
+    and artist_id = #{artistId}
+  </select>
+
+
+</mapper>

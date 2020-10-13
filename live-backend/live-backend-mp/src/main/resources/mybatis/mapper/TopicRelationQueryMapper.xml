@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD QueryMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.TopicRelationQueryMapper">
+  <resultMap id="BaseResultMap" type="me.fanchaoo.dbo.TopicRelationDBO">
+    <id column="id" property="id"/>
+    <result column="topic_id" property="topicId"/>
+    <result column="moment_id" property="momentId"/>
+    <result column="user_id" property="userId"/>
+    <result column="artist_id" property="artistId"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, topic_id, moment_id, user_id, artist_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from topic_relation
+    where id = #{id}
+  </select>
+
+  <select id="queryByTopicId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from topic_relation
+    where artist_id = #{artistId}
+    and topic_id = #{topicId}
+    order by id desc
+    limit #{start},#{pageSize}
+  </select>
+
+  <select id="countByTopicId" resultType="me.fanchaoo.web.dto.GroupCountDTO">
+    select topic_id as id,
+    count(*) as count
+    from topic_relation
+    where artist_id = #{artistId}
+    and topic_id in
+    <foreach collection="topicIdList" item="item" separator="," open="(" close=")">
+      #{item}
+    </foreach>
+    group by topic_id
+  </select>
+
+  <select id="countUserByTopicId" resultType="int">
+    select count(distinct user_id)
+    from topic_relation
+    where artist_id = #{artistId}
+    and topic_id = #{topicId}
+  </select>
+
+
+</mapper>

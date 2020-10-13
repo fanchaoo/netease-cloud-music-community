@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD QueryMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.MomentVideoQueryMapper">
+  <resultMap id="BaseResultMap" type="me.fanchaoo.dbo.MomentVideoDBO">
+    <id column="id" property="id"/>
+    <result column="moment_id" property="momentId"/>
+    <result column="title" property="title"/>
+    <result column="url" property="url"/>
+    <result column="width" property="width"/>
+    <result column="height" property="height"/>
+    <result column="size" property="size"/>
+    <result column="cover_url" property="coverUrl"/>
+    <result column="cover_width" property="coverWidth"/>
+    <result column="cover_height" property="coverHeight"/>
+    <result column="collect_count" property="collectCount"/>
+    <result column="source_channel" property="sourceChannel"/>
+    <result column="source_url" property="sourceUrl"/>
+    <result column="source_id" property="sourceId"/>
+    <result column="sequence" property="sequence"/>
+    <result column="artist_id" property="artistId"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, moment_id, title, url, width, height, size, cover_url, cover_width, cover_height,
+    collect_count, source_channel, source_url, source_id, sequence, artist_id, create_time,
+    update_time
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from moment_video
+    where artist_id = #{artistId}
+    and id = #{id}
+  </select>
+
+  <select id="queryByMomentIds" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from moment_video
+    where artist_id = #{artistId}
+    and moment_id in
+    <foreach collection="momentIdList" item="item" separator="," open="(" close=")">
+      #{item}
+    </foreach>
+  </select>
+
+  <select id="queryByIds" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from moment_video
+    where artist_id = #{artistId}
+    and id in
+    <foreach collection="idList" item="item" separator="," open="(" close=")">
+      #{item}
+    </foreach>
+  </select>
+
+
+</mapper>

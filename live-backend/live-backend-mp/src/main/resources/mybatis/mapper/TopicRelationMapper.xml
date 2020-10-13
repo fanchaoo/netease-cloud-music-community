@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.TopicRelationMapper">
+
+
+  <insert id="insertBatch" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into topic_relation (topic_id, moment_id, user_id, artist_id,
+    create_time, update_time)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.topicId}, #{item.momentId}, #{item.userId}, #{item.artistId},
+      now(), now())
+    </foreach>
+  </insert>
+</mapper>

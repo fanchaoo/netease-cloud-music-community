@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.MomentVideoMapper">
+
+
+  <delete id="deleteByPrimaryKey">
+    delete from moment_video
+    where id = #{id}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into moment_video (moment_id, title, url,
+      width, height, size,
+      cover_url, cover_width, cover_height,
+      collect_count, source_channel, source_url,
+      source_id, sequence, artist_id,
+      create_time, update_time)
+    values (#{momentId}, #{title}, #{url},
+      #{width}, #{height}, #{size},
+      #{coverUrl}, #{coverWidth}, #{coverHeight},
+      #{collectCount}, #{sourceChannel}, #{sourceUrl},
+      #{sourceId}, #{sequence}, #{artistId},
+      #{createTime}, #{updateTime})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into moment_video
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="momentId != null">
+        moment_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="width != null">
+        width,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="coverUrl != null">
+        cover_url,
+      </if>
+      <if test="coverWidth != null">
+        cover_width,
+      </if>
+      <if test="coverHeight != null">
+        cover_height,
+      </if>
+      <if test="collectCount != null">
+        collect_count,
+      </if>
+      <if test="sourceChannel != null">
+        source_channel,
+      </if>
+      <if test="sourceUrl != null">
+        source_url,
+      </if>
+      <if test="sourceId != null">
+        source_id,
+      </if>
+      <if test="sequence != null">
+        sequence,
+      </if>
+      <if test="artistId != null">
+        artist_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="momentId != null">
+        #{momentId},
+      </if>
+      <if test="title != null">
+        #{title},
+      </if>
+      <if test="url != null">
+        #{url},
+      </if>
+      <if test="width != null">
+        #{width},
+      </if>
+      <if test="height != null">
+        #{height},
+      </if>
+      <if test="size != null">
+        #{size},
+      </if>
+      <if test="coverUrl != null">
+        #{coverUrl},
+      </if>
+      <if test="coverWidth != null">
+        #{coverWidth},
+      </if>
+      <if test="coverHeight != null">
+        #{coverHeight},
+      </if>
+      <if test="collectCount != null">
+        #{collectCount},
+      </if>
+      <if test="sourceChannel != null">
+        #{sourceChannel},
+      </if>
+      <if test="sourceUrl != null">
+        #{sourceUrl},
+      </if>
+      <if test="sourceId != null">
+        #{sourceId},
+      </if>
+      <if test="sequence != null">
+        #{sequence},
+      </if>
+      <if test="artistId != null">
+        #{artistId},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateCollectCount">
+    update moment_video
+    set collect_count = collect_count + #{count}
+    where id = #{id}
+    and artist_id = #{artistId}
+  </update>
+</mapper>

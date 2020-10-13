@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.TopicMapper">
+
+
+  <delete id="deleteByPrimaryKey">
+    delete from topic
+    where id = #{id}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into topic (name, cover_url, create_user_id, 
+      last_update_user_id, artist_id, create_time, 
+      update_time)
+    values (#{name}, #{coverUrl}, #{createUserId}, 
+      #{lastUpdateUserId}, #{artistId}, #{createTime}, 
+      #{updateTime})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into topic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="coverUrl != null">
+        cover_url,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="lastUpdateUserId != null">
+        last_update_user_id,
+      </if>
+      <if test="artistId != null">
+        artist_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name},
+      </if>
+      <if test="coverUrl != null">
+        #{coverUrl},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId},
+      </if>
+      <if test="lastUpdateUserId != null">
+        #{lastUpdateUserId},
+      </if>
+      <if test="artistId != null">
+        #{artistId},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective">
+    update topic
+    <set>
+      <if test="name != null">
+        name = #{name},
+      </if>
+      <if test="coverUrl != null">
+        cover_url = #{coverUrl},
+      </if>
+      <if test="lastUpdateUserId != null">
+        last_update_user_id = #{lastUpdateUserId},
+      </if>
+      update_time = now()
+    </set>
+    where id = #{id} and artist_id = #{artistId}
+  </update>
+  <update id="updateByPrimaryKey">
+    update topic
+    set name = #{name},
+      cover_url = #{coverUrl},
+      create_user_id = #{createUserId},
+      last_update_user_id = #{lastUpdateUserId},
+      artist_id = #{artistId},
+      create_time = #{createTime},
+      update_time = #{updateTime}
+    where id = #{id}
+  </update>
+
+  <insert id="insertBatch" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into topic (name, cover_url, create_user_id,
+    last_update_user_id, artist_id, create_time,
+    update_time)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.name}, #{item.coverUrl}, #{item.createUserId},
+      #{item.lastUpdateUserId}, #{item.artistId}, now(),
+      now())
+    </foreach>
+  </insert>
+</mapper>

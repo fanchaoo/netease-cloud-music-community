@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.UserMapper">
+
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="avatarUrl != null">
+        avatar_url,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="miniWeixinUnionId != null">
+        mini_weixin_union_id,
+      </if>
+      <if test="miniWeixinOpenId != null">
+        mini_weixin_open_id,
+      </if>
+      <if test="miniQqUnionId != null">
+        mini_qq_union_id,
+      </if>
+      <if test="miniQqOpenId != null">
+        mini_qq_open_id,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="university != null">
+        university,
+      </if>
+      <if test="followCount != null">
+        follow_count,
+      </if>
+      <if test="fansCount != null">
+        fans_count,
+      </if>
+      <if test="letterUnread != null">
+        letter_unread,
+      </if>
+      <if test="commentUnread != null">
+        comment_unread,
+      </if>
+      <if test="atUnread != null">
+        at_unread,
+      </if>
+      <if test="notificationUnread != null">
+        notification_unread,
+      </if>
+      <if test="artistId != null">
+        artist_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name},
+      </if>
+      <if test="gender != null">
+        #{gender},
+      </if>
+      <if test="avatarUrl != null">
+        #{avatarUrl},
+      </if>
+      <if test="description != null">
+        #{description},
+      </if>
+      <if test="miniWeixinUnionId != null">
+        #{miniWeixinUnionId},
+      </if>
+      <if test="miniWeixinOpenId != null">
+        #{miniWeixinOpenId},
+      </if>
+      <if test="miniQqUnionId != null">
+        #{miniQqUnionId},
+      </if>
+      <if test="miniQqOpenId != null">
+        #{miniQqOpenId},
+      </if>
+      <if test="country != null">
+        #{country},
+      </if>
+      <if test="province != null">
+        #{province},
+      </if>
+      <if test="city != null">
+        #{city},
+      </if>
+      <if test="university != null">
+        #{university},
+      </if>
+      <if test="followCount != null">
+        #{followCount},
+      </if>
+      <if test="fansCount != null">
+        #{fansCount},
+      </if>
+      <if test="letterUnread != null">
+        #{letterUnread},
+      </if>
+      <if test="commentUnread != null">
+        #{commentUnread},
+      </if>
+      <if test="atUnread != null">
+        #{atUnread},
+      </if>
+      <if test="notificationUnread != null">
+        #{notificationUnread},
+      </if>
+      <if test="artistId != null">
+        #{artistId},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective">
+    update user
+    <set>
+      <if test="name != null and name.length() > 0">
+        name = #{name},
+      </if>
+      <if test="gender != null">
+        gender = #{gender},
+      </if>
+      <if test="avatarUrl != null">
+        avatar_url = #{avatarUrl},
+      </if>
+      <if test="description != null">
+        description = #{description},
+      </if>
+      <if test="province != null">
+        province = #{province},
+      </if>
+      <if test="city != null">
+        city = #{city},
+      </if>
+      <if test="university != null">
+        university = #{university},
+      </if>
+      <if test="letterUnread != null">
+        letter_unread = #{letterUnread},
+      </if>
+      <if test="commentUnread != null">
+        comment_unread = #{commentUnread},
+      </if>
+      <if test="atUnread != null">
+        at_unread = #{atUnread},
+      </if>
+      <if test="notificationUnread != null">
+        notification_unread = #{notificationUnread},
+      </if>
+      update_time = now()
+    </set>
+    where id = #{id}
+    and artist_id = #{artistId}
+  </update>
+
+  <update id="updateFollowCount">
+    update user
+    set follow_count = follow_count + #{count}
+    where id = #{userId}
+    and artist_id = #{artistId}
+  </update>
+
+  <update id="updateFansCount">
+    update user
+    set fans_count = fans_count + #{count}
+    where id = #{userId}
+    and artist_id = #{artistId}
+  </update>
+
+  <update id="updateCommentUnread">
+    update user
+    set comment_unread = comment_unread + #{count}
+    where id = #{userId}
+    and artist_id = #{artistId}
+  </update>
+
+  <update id="clearCommentUnread">
+    update user
+    set comment_unread = 0
+    where id = #{userId}
+    and artist_id = #{artistId}
+    and comment_unread > 0
+  </update>
+
+  <update id="updateAtUnread">
+    update user
+    set at_unread = at_unread + #{count}
+    where id = #{userId}
+    and artist_id = #{artistId}
+  </update>
+
+  <update id="clearAtUnread">
+    update user
+    set at_unread = 0
+    where id = #{userId}
+    and artist_id = #{artistId}
+    and at_unread > 0
+  </update>
+
+  <update id="updateNotificationUnread">
+    update user
+    set notification_unread = notification_unread + #{count}
+    where id = #{userId}
+    and artist_id = #{artistId}
+  </update>
+
+  <update id="clearNotificationUnread">
+    update user
+    set notification_unread = 0
+    where id = #{userId}
+    and artist_id = #{artistId}
+    and notification_unread > 0
+  </update>
+</mapper>

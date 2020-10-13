@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD QueryMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.MomentQueryMapper">
+  <resultMap id="BaseResultMap" type="me.fanchaoo.dbo.MomentDBO">
+    <id column="id" property="id"/>
+    <result column="user_id" property="userId"/>
+    <result column="type" property="type"/>
+    <result column="text_content" property="textContent"/>
+    <result column="activity_id" property="activityId"/>
+    <result column="like_count" property="likeCount"/>
+    <result column="comment_count" property="commentCount"/>
+    <result column="repost_count" property="repostCount"/>
+    <result column="share_count" property="shareCount"/>
+    <result column="view_count" property="viewCount"/>
+    <result column="repost_moment_id" property="repostMomentId"/>
+    <result column="status" property="status"/>
+    <result column="artist_id" property="artistId"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, type, text_content, activity_id, like_count, comment_count, repost_count,
+    share_count, view_count, repost_moment_id, status, artist_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from moment
+    where id = #{id}
+  </select>
+
+  <select id="queryMoment" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from moment
+    where artist_id = #{artistId}
+    and status = 1
+    <if test="type != null">
+      and type = #{type}
+    </if>
+    <if test="repostMomentId != null">
+      and repost_moment_id = #{repostMomentId}
+    </if>
+    <if test="userIdList != null and userIdList.size() > 0">
+      and user_id in
+      <foreach collection="userIdList" item="item" separator="," open="(" close=")">
+        #{item}
+      </foreach>
+    </if>
+    <if test="activityId != null">
+      and activity_id = #{activityId}
+    </if>
+    <if test="idList != null and idList.size() > 0">
+      and id in
+      <foreach collection="idList" item="item" separator="," open="(" close=")">
+        #{item}
+      </foreach>
+    </if>
+    order by id desc
+    <if test="start != null and pageSize != null">
+      limit #{start},#{pageSize}
+    </if>
+  </select>
+
+  <select id="queryMomentByIds" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from moment
+    where artist_id = #{artistId}
+    and status = 1
+    and id in
+    <foreach collection="idList" item="item" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </select>
+
+  <select id="getById" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from moment
+    where id = #{id}
+    and artist_id = #{artistId}
+    and status = #{status}
+  </select>
+
+  <select id="getUserId" resultType="long">
+    select
+    user_id
+    from moment
+    where id = #{id}
+    and artist_id = #{artistId}
+  </select>
+
+  <select id="queryByRepostMomentId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from moment
+    where artist_id = #{artistId}
+    and repost_moment_id = #{repostMomentId}
+    and status = 1
+    order by id desc
+    limit #{start},#{pageSize}
+  </select>
+
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD QueryMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.ArtistQueryMapper">
+  <resultMap id="BaseResultMap" type="me.fanchaoo.dbo.ArtistDBO">
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="mp_weixin_app_id" property="mpWeixinAppId"/>
+    <result column="mp_weixin_app_secret" property="mpWeixinAppSecret"/>
+    <result column="mp_qq_app_id" property="mpQqAppId"/>
+    <result column="mp_qq_app_secret" property="mpQqAppSecret"/>
+    <result column="random_key" property="randomKey"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, mp_weixin_app_id, mp_weixin_app_secret, mp_qq_app_id, mp_qq_app_secret, 
+    random_key, create_time, update_time
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from artist
+    where id = #{id}
+  </select>
+
+  <select id="getByRandomKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from artist
+    where random_key = #{randomKey}
+    limit 1
+  </select>
+
+
+</mapper>

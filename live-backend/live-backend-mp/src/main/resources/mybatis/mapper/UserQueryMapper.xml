@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD QueryMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.UserQueryMapper">
+  <resultMap id="BaseResultMap" type="me.fanchaoo.dbo.UserDBO">
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="gender" property="gender"/>
+    <result column="avatar_url" property="avatarUrl"/>
+    <result column="description" property="description"/>
+    <result column="mini_weixin_union_id" property="miniWeixinUnionId"/>
+    <result column="mini_weixin_open_id" property="miniWeixinOpenId"/>
+    <result column="mini_qq_union_id" property="miniQqUnionId"/>
+    <result column="mini_qq_open_id" property="miniQqOpenId"/>
+    <result column="country" property="country"/>
+    <result column="province" property="province"/>
+    <result column="city" property="city"/>
+    <result column="university" property="university"/>
+    <result column="follow_count" property="followCount"/>
+    <result column="fans_count" property="fansCount"/>
+    <result column="letter_unread" property="letterUnread" />
+    <result column="comment_unread" property="commentUnread" />
+    <result column="at_unread" property="atUnread" />
+    <result column="notification_unread" property="notificationUnread" />
+    <result column="artist_id" property="artistId"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, gender, avatar_url, description, mini_weixin_union_id, mini_weixin_open_id, mini_qq_union_id,
+    mini_qq_open_id, country, province, city, university, follow_count, fans_count, letter_unread, comment_unread, at_unread, notification_unread, artist_id,
+    create_time, update_time
+  </sql>
+  <select id="getById" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where id = #{id}
+    and artist_id = #{artistId}
+  </select>
+
+  <select id="getByMiniWeixinUnionId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where artist_id = #{artistId}
+    <if test="unionId != null and unionId.length() > 0">
+      and mini_weixin_union_id = #{unionId}
+    </if>
+    <if test="openId != null and openId.length() > 0">
+      and mini_weixin_open_id = #{openId}
+    </if>
+  </select>
+
+  <select id="getByMiniQQUnionId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where artist_id = #{artistId}
+    <if test="unionId != null and unionId.length() > 0">
+      and mini_qq_union_id = #{unionId}
+    </if>
+    <if test="openId != null and openId.length() > 0">
+      and mini_qq_open_id = #{openId}
+    </if>
+  </select>
+
+  <select id="queryByUserIds" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where artist_id = #{artistId}
+    and id in
+    <foreach collection="userIdList" item="item" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </select>
+
+  <select id="queryByNames" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where artist_id = #{artistId}
+    and name in
+    <foreach collection="nameSet" item="item" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </select>
+
+</mapper>

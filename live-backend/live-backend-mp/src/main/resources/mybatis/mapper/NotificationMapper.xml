@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.NotificationMapper">
+
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into notification
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="category != null">
+        category,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="receiveUserId != null">
+        receive_user_id,
+      </if>
+      <if test="sendUserId != null">
+        send_user_id,
+      </if>
+      <if test="momentId != null">
+        moment_id,
+      </if>
+      <if test="parentCommentId != null">
+        parent_comment_id,
+      </if>
+      <if test="commentId != null">
+        comment_id,
+      </if>
+      <if test="artistId != null">
+        artist_id,
+      </if>
+      create_time, update_time
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="category != null">
+        #{category},
+      </if>
+      <if test="type != null">
+        #{type},
+      </if>
+      <if test="receiveUserId != null">
+        #{receiveUserId},
+      </if>
+      <if test="sendUserId != null">
+        #{sendUserId},
+      </if>
+      <if test="momentId != null">
+        #{momentId},
+      </if>
+      <if test="parentCommentId != null">
+        #{parentCommentId},
+      </if>
+      <if test="commentId != null">
+        #{commentId},
+      </if>
+      <if test="artistId != null">
+        #{artistId},
+      </if>
+      now(), now()
+    </trim>
+  </insert>
+</mapper>

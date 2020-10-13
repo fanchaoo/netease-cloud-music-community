@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.MomentImageMapper">
+
+
+  <delete id="deleteByPrimaryKey">
+    delete from moment_image
+    where id = #{id}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into moment_image (moment_id, url, width,
+      height, artist_id, create_time,
+      update_time)
+    values (#{momentId}, #{url}, #{width},
+      #{height}, #{artistId}, #{createTime},
+      #{updateTime})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into moment_image
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="momentId != null">
+        moment_id,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="width != null">
+        width,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="artistId != null">
+        artist_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="momentId != null">
+        #{momentId},
+      </if>
+      <if test="url != null">
+        #{url},
+      </if>
+      <if test="width != null">
+        #{width},
+      </if>
+      <if test="height != null">
+        #{height},
+      </if>
+      <if test="artistId != null">
+        #{artistId},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective">
+    update moment_image
+    <set>
+      <if test="momentId != null">
+        moment_id = #{momentId},
+      </if>
+      <if test="url != null">
+        url = #{url},
+      </if>
+      <if test="width != null">
+        width = #{width},
+      </if>
+      <if test="height != null">
+        height = #{height},
+      </if>
+      <if test="artistId != null">
+        artist_id = #{artistId},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey">
+    update moment_image
+    set moment_id = #{momentId},
+      url = #{url},
+      width = #{width},
+      height = #{height},
+      artist_id = #{artistId},
+      create_time = #{createTime},
+      update_time = #{updateTime}
+    where id = #{id}
+  </update>
+
+  <insert id="insertBatch" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into moment_image
+    (moment_id, url, width, height, artist_id)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.momentId}, #{item.url}, #{item.width}, #{item.height}, #{item.artistId})
+    </foreach>
+  </insert>
+</mapper>

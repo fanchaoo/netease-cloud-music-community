@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD QueryMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.ActivityQueryMapper">
+  <resultMap id="BaseResultMap" type="me.fanchaoo.dbo.ActivityDBO">
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="show_start_time" property="showStartTime"/>
+    <result column="show_end_time" property="showEndTime"/>
+    <result column="venue_city" property="venueCity"/>
+    <result column="venue_name" property="venueName"/>
+    <result column="venue_address" property="venueAddress"/>
+    <result column="poster_image" property="posterImage"/>
+    <result column="source_channel" property="sourceChannel"/>
+    <result column="source_id" property="sourceId"/>
+    <result column="source_url" property="sourceUrl"/>
+    <result column="online" property="online"/>
+    <result column="artist_id" property="artistId"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, show_start_time, show_end_time, venue_city, venue_name, venue_address,
+    poster_image, source_channel, source_id, source_url, online, artist_id, create_time,
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from activity
+    where id = #{id}
+  </select>
+
+  <select id="queryActivity" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from activity
+    where artist_id = #{artistId}
+    order by show_start_time desc
+    limit #{start},#{pageSize}
+  </select>
+
+  <select id="queryActivityByIds" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from activity
+    where artist_id = #{artistId}
+    and id in
+    <foreach collection="idList" item="item" separator="," open="(" close=")">
+      #{item}
+    </foreach>
+  </select>
+
+
+</mapper>

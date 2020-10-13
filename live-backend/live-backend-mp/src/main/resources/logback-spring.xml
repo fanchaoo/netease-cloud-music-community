@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false" debug="false">
+
+  <!-- 定义日志文件的存储地 -->
+  <property name="LOG_PATH" value="/var/log/live"/>
+
+  <property name="CONSOLE_LOG_PATTERN"
+            value="%d{HH:mm:ss.SSS} %-5level [%10.10thread] %-30.30logger{29}\(%4L\\) - %msg%n"/>
+
+  <!-- 控制台输出 -->
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+      <charset>utf-8</charset>
+    </encoder>
+  </appender>
+
+  <!-- 文件日志格式(打印日志，不打印行号) -->
+  <property name="FILE_LOG_PATTERN"
+            value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%10.10thread] %-30.30logger{29} - %msg%n"/>
+
+  <appender name="FILE_ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!-- 正在记录的日志文件的路径及文件名 -->
+    <file>${LOG_PATH}/log.log</file>
+    <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <!-- yyyy-MM-dd 按日滚动 -->
+      <fileNamePattern>${LOG_PATH}/log-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <!-- 单个文件最大50M -->
+      <maxFileSize>50MB</maxFileSize>
+      <!--  最多占用5G磁盘空间，500个文件（总共不能超过该5G） -->
+      <maxHistory>500</maxHistory>
+      <totalSizeCap>5GB</totalSizeCap>
+    </rollingPolicy>
+    <!-- 追加方式记录日志 -->
+    <append>true</append>
+    <!-- 日志文件的格式 -->
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <pattern>${FILE_LOG_PATTERN}</pattern>
+      <charset>utf-8</charset>
+    </encoder>
+  </appender>
+
+  <springProfile name="prod">
+    <root>
+      <level value="INFO"/>
+      <appender-ref ref="FILE_ALL"/>
+    </root>
+  </springProfile>
+  <springProfile name="dev">
+    <root>
+      <level value="INFO"/>
+      <appender-ref ref="STDOUT"/>
+    </root>
+  </springProfile>
+</configuration>

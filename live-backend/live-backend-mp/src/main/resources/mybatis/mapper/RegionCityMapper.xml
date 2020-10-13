@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.RegionCityMapper">
+  
+  
+  
+  <delete id="deleteByPrimaryKey">
+    delete from region_city
+    where id = #{id}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into region_city (name, province_id)
+    values (#{name}, #{provinceId})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into region_city
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="provinceId != null">
+        province_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name},
+      </if>
+      <if test="provinceId != null">
+        #{provinceId},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective">
+    update region_city
+    <set>
+      <if test="name != null">
+        name = #{name},
+      </if>
+      <if test="provinceId != null">
+        province_id = #{provinceId},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey">
+    update region_city
+    set name = #{name},
+      province_id = #{provinceId}
+    where id = #{id}
+  </update>
+</mapper>

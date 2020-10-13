@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD QueryMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.PrivateLetterQueryMapper">
+  <resultMap id="BaseResultMap" type="me.fanchaoo.dbo.PrivateLetterDBO">
+    <id column="id" property="id" />
+    <result column="sender_user_id" property="senderUserId" />
+    <result column="receiver_user_id" property="receiverUserId" />
+    <result column="type" property="type" />
+    <result column="text_content" property="textContent" />
+    <result column="image_url" property="imageUrl" />
+    <result column="artist_id" property="artistId" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sender_user_id, receiver_user_id, type, text_content, image_url, artist_id, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from private_letter
+    where id = #{id}
+  </select>
+  
+  
+  
+</mapper>

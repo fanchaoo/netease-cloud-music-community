@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.fanchaoo.web.dao.mapper.ActivityMapper">
+  
+  
+  
+  <delete id="deleteByPrimaryKey">
+    delete from activity
+    where id = #{id}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into activity (name, show_start_time, show_end_time, 
+      venue_city, venue_name, venue_address, 
+      poster_image, source_channel, source_id, 
+      source_url, online, artist_id, 
+      create_time, update_time)
+    values (#{name}, #{showStartTime}, #{showEndTime}, 
+      #{venueCity}, #{venueName}, #{venueAddress}, 
+      #{posterImage}, #{sourceChannel}, #{sourceId}, 
+      #{sourceUrl}, #{online}, #{artistId}, 
+      #{createTime}, #{updateTime})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into activity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="showStartTime != null">
+        show_start_time,
+      </if>
+      <if test="showEndTime != null">
+        show_end_time,
+      </if>
+      <if test="venueCity != null">
+        venue_city,
+      </if>
+      <if test="venueName != null">
+        venue_name,
+      </if>
+      <if test="venueAddress != null">
+        venue_address,
+      </if>
+      <if test="posterImage != null">
+        poster_image,
+      </if>
+      <if test="sourceChannel != null">
+        source_channel,
+      </if>
+      <if test="sourceId != null">
+        source_id,
+      </if>
+      <if test="sourceUrl != null">
+        source_url,
+      </if>
+      <if test="online != null">
+        online,
+      </if>
+      <if test="artistId != null">
+        artist_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name},
+      </if>
+      <if test="showStartTime != null">
+        #{showStartTime},
+      </if>
+      <if test="showEndTime != null">
+        #{showEndTime},
+      </if>
+      <if test="venueCity != null">
+        #{venueCity},
+      </if>
+      <if test="venueName != null">
+        #{venueName},
+      </if>
+      <if test="venueAddress != null">
+        #{venueAddress},
+      </if>
+      <if test="posterImage != null">
+        #{posterImage},
+      </if>
+      <if test="sourceChannel != null">
+        #{sourceChannel},
+      </if>
+      <if test="sourceId != null">
+        #{sourceId},
+      </if>
+      <if test="sourceUrl != null">
+        #{sourceUrl},
+      </if>
+      <if test="online != null">
+        #{online},
+      </if>
+      <if test="artistId != null">
+        #{artistId},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective">
+    update activity
+    <set>
+      <if test="name != null">
+        name = #{name},
+      </if>
+      <if test="showStartTime != null">
+        show_start_time = #{showStartTime},
+      </if>
+      <if test="showEndTime != null">
+        show_end_time = #{showEndTime},
+      </if>
+      <if test="venueCity != null">
+        venue_city = #{venueCity},
+      </if>
+      <if test="venueName != null">
+        venue_name = #{venueName},
+      </if>
+      <if test="venueAddress != null">
+        venue_address = #{venueAddress},
+      </if>
+      <if test="posterImage != null">
+        poster_image = #{posterImage},
+      </if>
+      <if test="sourceChannel != null">
+        source_channel = #{sourceChannel},
+      </if>
+      <if test="sourceId != null">
+        source_id = #{sourceId},
+      </if>
+      <if test="sourceUrl != null">
+        source_url = #{sourceUrl},
+      </if>
+      <if test="online != null">
+        online = #{online},
+      </if>
+      <if test="artistId != null">
+        artist_id = #{artistId},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey">
+    update activity
+    set name = #{name},
+      show_start_time = #{showStartTime},
+      show_end_time = #{showEndTime},
+      venue_city = #{venueCity},
+      venue_name = #{venueName},
+      venue_address = #{venueAddress},
+      poster_image = #{posterImage},
+      source_channel = #{sourceChannel},
+      source_id = #{sourceId},
+      source_url = #{sourceUrl},
+      online = #{online},
+      artist_id = #{artistId},
+      create_time = #{createTime},
+      update_time = #{updateTime}
+    where id = #{id}
+  </update>
+</mapper>
