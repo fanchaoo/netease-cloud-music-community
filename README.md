@@ -50,7 +50,9 @@
 
 ![image.png](https://upload-images.jianshu.io/upload_images/1754553-26b1b3281e92399c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-4. 运行到微信小程序
+4. 在项目根目录运行“npm install”
+
+5. 运行到微信小程序
 
 ![image.png](https://upload-images.jianshu.io/upload_images/1754553-25c7af0b1cd18477.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
