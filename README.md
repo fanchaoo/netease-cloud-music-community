@@ -6,6 +6,10 @@
 
 ![image.png](https://upload-images.jianshu.io/upload_images/1754553-a870b839d364ca92.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+# 演示小程序（QQ扫码）
+
+![](https://cclive.org.cn/miniqq.png)
+
 # 技术栈
 
 后端：Java，SpringBoot，MyBatis，MySQL，Redis
